@@ -41,8 +41,14 @@ Route::controller(secondController::class)->group(function () {
     Route::post("delete_Attendance", "deleteAttendance");
 });
 
-Route::controller(admin::class)->group(function (){
+Route::controller(admin::class)->group(function () {
 
 
-    Route::get("admin-home",'adminHome');
+    Route::get("admin-home", 'adminHome');
+    Route::get("customer-permission", 'customerPermission')->name("customerpermission");
+    Route::get("seller-permission", 'sellerPermission')->name("sellerpermission");
+    Route::get("/admin-permission", 'adminPermission')->name("adminpermission");
+    Route::post("edit-customer-permission", 'editCustomerPermission');
+    Route::post("edit-seller-permission", 'editSellerPermission');
+    Route::post("edit-admin-permission", 'editAdminPermission');
 });

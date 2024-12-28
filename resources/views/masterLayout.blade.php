@@ -158,6 +158,33 @@
             })
 
 
+            // Editing permission
+
+
+            $(document).on("click", "#customerpermissionsubmit", function(event) {
+
+                const form = new FormData(document.getElementById("adminpermissionForm"));
+
+                $.ajax({
+
+                    processData: false
+                    , contentType: false
+                    , url: "/edit-customer-permission"
+                    , method: "POST"
+                    , data: form,
+
+                    success: function(response) {
+                        alert(response.result);
+                    }
+                    , error: function(error) {
+                        alert("Something went wrong");
+
+                        console.error;
+                    }
+                })
+            })
+
+
 
 
             //  to display the data from database using datatables Yajra
