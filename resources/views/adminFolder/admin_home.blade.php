@@ -12,20 +12,21 @@
         </tr>
     </thead>
     <tbody>
+
+        @foreach ($designations as $ds)
         <tr>
-            <td>1</td>
-            <td><a href="customer-permission">Customer</a></td>
+            <td>{{ $loop->iteration }}</td>
+            <td><a href="{{ $ds->designation_name }}-permission">{{ $ds->designation_name }}</a></td>
         </tr>
-        <tr>
-            <td>2</td>
-            <td><a href="seller-permission">Seller</a></td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td><a href="admin-permission">Admin</a></td>
-        </tr>
+        @endforeach
+
+
     </tbody>
 </table>
+
+<a href="/add-designation">
+    <div class="btn btn-primary">Add Designation</div>
+</a>
 
 
 

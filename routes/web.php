@@ -45,10 +45,8 @@ Route::controller(admin::class)->group(function () {
 
 
     Route::get("admin-home", 'adminHome');
-    Route::get("customer-permission", 'customerPermission')->name("customerpermission");
-    Route::get("seller-permission", 'sellerPermission')->name("sellerpermission");
-    Route::get("/admin-permission", 'adminPermission')->name("adminpermission");
-    Route::post("edit-customer-permission", 'editCustomerPermission');
-    Route::post("edit-seller-permission", 'editSellerPermission');
-    Route::post("edit-admin-permission", 'editAdminPermission');
+    Route::get("add-designation", 'addDesignationView');
+    Route::post("add-designation", 'addDesignationMethod');
+    Route::get("{role}-permission", 'rolePermission');
+    Route::post("edit-permission-{role}", 'editPermissionRole');
 });

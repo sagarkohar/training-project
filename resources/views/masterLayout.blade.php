@@ -163,7 +163,7 @@
 
             $(document).on("click", "#customerpermissionsubmit", function(event) {
 
-                const form = new FormData(document.getElementById("adminpermissionForm"));
+                const form = new FormData(document.getElementById("customerpermissionForm"));
 
                 $.ajax({
 
@@ -183,6 +183,8 @@
                     }
                 })
             })
+
+
 
 
 

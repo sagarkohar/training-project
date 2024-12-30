@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class vlogs extends Model
+class permission extends Model
 {
     use HasFactory;
 
-    protected $table = "vlogs";
+    protected $table = "permissions";
 }

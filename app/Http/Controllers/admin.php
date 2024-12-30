@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\designation;
+use App\Models\models;
+use App\Models\permission;
+use App\Models\permmissions;
 use App\Models\products;
 use App\Models\vlogs;
 use Illuminate\Http\Request;
@@ -10,69 +14,67 @@ class admin extends Controller
 {
     function adminHome()
     {
-        return view("adminFolder.admin_home");
+        $designations = designation::all();
+        return view("adminFolder.admin_home", compact("designations"));
     }
 
-    function customerPermission()
-    {
 
-        $product_per = products::where("role", "customer")->first();
-        $vlogs_per = vlogs::where("role", "customer")->first();
-        return view("adminFolder.customerpermission", compact("product_per", "vlogs_per"));
+    function addDesignationView()
+    {
+        return view("adminFolder.add_designation");
     }
 
-    function sellerPermission()
+    function addDesignationMethod(Request $request)
     {
-        return view("adminFolder.sellerpermission");
+
+        $insert = new designation();
+
+        $insert->designation_name = $request['designation'];
+        $insert->save();
+        return redirect("/admin-home");
     }
 
-    function adminPermission()
+    function rolePermission($role)
     {
-        return view("adminFolder.adminpermission");
+
+
+        $data = models::with(['getPermission' => function ($query) use ($role) {
+            $query->where('role', $role);
+        }])->get();
+
+
+
+        return view("adminFolder.editpermission", compact("data", "role"));
     }
 
-    function editCustomerPermission(Request $request)
+    public function editPermissionRole(Request $request)
     {
+        foreach ($request->input('model') as $md) {
+            // Check if the permission already exists
+            $permission = Permission::where('role', $request->input('role'))
+                ->where('models_id', $md['m'])
+                ->first();
 
 
-        $delp = products::where("role", "customer")->first();
-        $delv = vlogs::where("role", "customer")->first();
+            if ($permission) {
+                $permission->delete();
+            }
+            // Create a new permission if it doesn't exist
+            $permission = new Permission();
+            $permission->role = $request->input('role');
+            $permission->models_id = $md['m'];
 
+            // Update the permission fields
+            $permission->view = $md['v'] ?? 'no';
+            $permission->edit = $md['e'] ?? 'no';
+            $permission->delete = $md['d'] ?? 'no';
+            $permission->add = $md['a'] ?? 'no';
 
-        if ($delp) {
-            $delp->delete();
+            // Save the permission
+            $permission->save();
         }
 
-        $insert_pro_per = new products();
-
-        $insert_pro_per->role = "customer";
-        $insert_pro_per->view = $request['pview'];
-        $insert_pro_per->delete = $request['pdelete'];
-        $insert_pro_per->edit = $request['pedit'];
-        $insert_pro_per->create = $request['pcreate'];
-
-
-        $insert_pro_per->save();
-
-
-
-        if ($delv) {
-            $delv->delete();
-        }
-
-
-        $insert_vl_per = new vlogs();
-
-        $insert_vl_per->role = "customer";
-        $insert_vl_per->view = $request['vview'];
-        $insert_vl_per->delete = $request['vdelete'];
-        $insert_vl_per->edit = $request['vedit'];
-        $insert_vl_per->create = $request['vcreate'];
-        $insert_vl_per->save();
-
-
-
-
-        return response()->json(["result" => "Success"]);
+        // Redirect or return response
+        return redirect()->back()->with('success', 'Permissions updated successfully.');
     }
 }
