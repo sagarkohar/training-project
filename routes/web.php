@@ -54,6 +54,7 @@ Route::controller(rolepermission::class)->group(function () {
     Route::post("assign-permission", "assignPermission");
     Route::get("users", "users");
     Route::get("user-roles-{user}", "userRole");
+});
 Route::controller(admin::class)->group(function () {
 
 
