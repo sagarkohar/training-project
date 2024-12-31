@@ -367,6 +367,19 @@
 
 </head>
 <body>
+
+    @if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
+
+    @if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+    @endif
+
     <div class="container mt-3">
         <div class="row">
             <div class="col-12 col-lg-1 col-sm-1">
