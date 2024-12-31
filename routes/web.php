@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin;
 use App\Http\Controllers\firstController;
 use App\Http\Controllers\rolepermission;
 use App\Http\Controllers\secondController;
@@ -41,7 +42,6 @@ Route::controller(secondController::class)->group(function () {
     Route::post("delete_Attendance", "deleteAttendance");
 });
 
-
 Route::controller(rolepermission::class)->group(function () {
 
     Route::get("designations", "designation")->name("designation");
@@ -54,4 +54,12 @@ Route::controller(rolepermission::class)->group(function () {
     Route::post("assign-permission", "assignPermission");
     Route::get("users", "users");
     Route::get("user-roles-{user}", "userRole");
+Route::controller(admin::class)->group(function () {
+
+
+    Route::get("admin-home", 'adminHome');
+    Route::get("add-designation", 'addDesignationView');
+    Route::post("add-designation", 'addDesignationMethod');
+    Route::get("{role}-permission", 'rolePermission');
+    Route::post("edit-permission-{role}", 'editPermissionRole');
 });

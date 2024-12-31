@@ -1,0 +1,1 @@
+<h1>Hi this is home of page of admin</h1>
