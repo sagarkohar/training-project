@@ -110,7 +110,7 @@ class rolepermission extends Controller
     public function users()
     {
 
-        $user_details = User::all();
+        $user_details = User::orderBy("name", "asc")->paginate(10);
         return view("rolepermission.user_view", compact("user_details"));
     }
 
@@ -119,6 +119,22 @@ class rolepermission extends Controller
 
 
         $roles = Role::all();
-        return view("rolepermission.assign_role", compact("user_email", "roles"));
+
+        $user = User::where("email", $user_email)->first();
+
+        $user_roles = $user->getRoleNames();
+        return view("rolepermission.assign_role", compact("user_email", "roles", "user_roles"));
+    }
+
+    public function  assignRoles(Request $request)
+    {
+
+        $user_email = $request['user_email'];
+
+        $user = User::where("email", $user_email)->first();
+
+        $user->syncRoles($request['roles']);
+
+        return redirect()->back()->with("success", "Role has been assigned successfully");
     }
 }

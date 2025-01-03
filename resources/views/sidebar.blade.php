@@ -7,9 +7,6 @@
         <li><a class="dropdown-item" href="/attendance-home">Attendance</a></li>
 
         <li><a class="dropdown-item" href="/designations">Designations</a></li>
-        <li><a class="dropdown-item" href="/admin-home">Admin</a></li>
-
-
 
 
 

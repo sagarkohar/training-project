@@ -28,4 +28,11 @@
 
     </tbody>
 </table>
+
+{{-- !-- Pagination Links --> --}}
+<div class="d-flex justify-content-right">
+    <nav>
+        {{ $user_details->links('pagination::bootstrap-4') }}
+    </nav>
+</div>
 @endsection

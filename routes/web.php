@@ -54,13 +54,14 @@ Route::controller(rolepermission::class)->group(function () {
     Route::post("assign-permission", "assignPermission");
     Route::get("users", "users");
     Route::get("user-roles-{user}", "userRole");
+    Route::post("assign-roles", "assignRoles");
 });
-Route::controller(admin::class)->group(function () {
+// Route::controller(admin::class)->group(function () {
 
 
-    Route::get("admin-home", 'adminHome');
-    Route::get("add-designation", 'addDesignationView');
-    Route::post("add-designation", 'addDesignationMethod');
-    Route::get("{role}-permission", 'rolePermission');
-    Route::post("edit-permission-{role}", 'editPermissionRole');
-});
+//     Route::get("admin-home", 'adminHome');
+//     Route::get("add-designation", 'addDesignationView');
+//     Route::post("add-designation", 'addDesignationMethod');
+//     Route::get("{role}-permission", 'rolePermission');
+//     Route::post("edit-permission-{role}", 'editPermissionRole');
+// });

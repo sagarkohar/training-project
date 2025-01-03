@@ -17,11 +17,13 @@
     </label>
     <br>
 
-    <form action="/assing-roles" method="post">
+
+
+    <form action="/assign-roles" method="post">
 
         @csrf
 
-        <input type="hidden" name="user" value="{{ $user_email }}" id="">
+        <input type="hidden" name="user_email" value="{{ $user_email }}" id="">
 
         <label for="">
             <h4>Roles: </h4>
@@ -35,7 +37,7 @@
 
                     @foreach ($roles as $role)
 
-                    <label for=""><input type="checkbox" class="rounded" name="roles[]" value="{{ $role->name }}" id=""></label>
+                    <label for=""><input type="checkbox" class="rounded" {{ App\Models\User::where("email",$user_email)->first()->hasRole($role->name)? 'checked':'' }} name="roles[]" value="{{ $role->name }}" id=""></label>
                     <label for="">{{ $role->name }}</label>&nbsp;&nbsp;
 
                     @endforeach
