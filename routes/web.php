@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin;
 use App\Http\Controllers\firstController;
+use App\Http\Controllers\login;
 use App\Http\Controllers\rolepermission;
 use App\Http\Controllers\secondController;
 use Illuminate\Support\Facades\Route;
@@ -42,26 +43,29 @@ Route::controller(secondController::class)->group(function () {
     Route::post("delete_Attendance", "deleteAttendance");
 });
 
-Route::controller(rolepermission::class)->group(function () {
+Route::middleware(['checkUser'])->group(function () {
+    Route::controller(rolepermission::class)->group(function () {
 
-    Route::get("designations", "designation")->name("designation");
-    Route::get("add-designation", "addDesignationView");
-    Route::post("add-designation", "addDesignationMethod");
-    Route::get("permissions", 'permissions')->name("permissions");
-    Route::get("/add-permission", 'addPermissionView');
-    Route::post("add-permission", "addPermissionMethod");
-    Route::get("show-permission-{role}", "showPermissionRole");
-    Route::post("assign-permission", "assignPermission");
-    Route::get("users", "users");
-    Route::get("user-roles-{user}", "userRole");
-    Route::post("assign-roles", "assignRoles");
+        Route::get("designations", "designation")->name("designation");
+        Route::get("add-designation", "addDesignationView");
+        Route::post("add-designation", "addDesignationMethod");
+        Route::get("permissions", 'permissions')->name("permissions");
+        Route::get("/add-permission", 'addPermissionView');
+        Route::post("add-permission", "addPermissionMethod");
+        Route::get("show-permission-{role}", "showPermissionRole");
+        Route::post("assign-permission", "assignPermission");
+        Route::get("users", "users");
+        Route::get("user-roles-{user}", "userRole");
+        Route::post("assign-roles", "assignRoles");
+        Route::get("profile", 'profile')->name("profile");
+    });
 });
-// Route::controller(admin::class)->group(function () {
 
 
-//     Route::get("admin-home", 'adminHome');
-//     Route::get("add-designation", 'addDesignationView');
-//     Route::post("add-designation", 'addDesignationMethod');
-//     Route::get("{role}-permission", 'rolePermission');
-//     Route::post("edit-permission-{role}", 'editPermissionRole');
-// });
+
+Route::controller(login::class)->group(function () {
+
+    Route::get("/login_page", 'loginPage')->name("loginpage");
+    Route::post("/login", 'login');
+    Route::get("/logout", 'logout');
+});

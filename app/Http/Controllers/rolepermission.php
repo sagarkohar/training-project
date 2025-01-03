@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Symfony\Component\CssSelector\Node\FunctionNode;
 
 class rolepermission extends Controller
 {
@@ -15,6 +16,15 @@ class rolepermission extends Controller
 
     public function designation()
     {
+
+        $user = User::first();
+
+        $super_admin = Role::where("name", "SuperAdmin")->first();
+
+        if ($super_admin) {
+
+            $user->assignRole([$super_admin->name]);
+        }
 
         $designations = Role::orderBy("created_at", "ASC")->paginate(6);
 
@@ -110,7 +120,7 @@ class rolepermission extends Controller
     public function users()
     {
 
-        $user_details = User::orderBy("name", "asc")->paginate(10);
+        $user_details = User::orderBy("created_at", "asc")->paginate(10);
         return view("rolepermission.user_view", compact("user_details"));
     }
 
@@ -136,5 +146,16 @@ class rolepermission extends Controller
         $user->syncRoles($request['roles']);
 
         return redirect()->back()->with("success", "Role has been assigned successfully");
+    }
+
+
+    public function profile()
+    {
+        $roles = Role::all();
+
+        $permissions = Permission::orderBy("name", "ASC")->get();
+
+
+        return view("rolepermission.profile", compact("roles", "permissions"));
     }
 }

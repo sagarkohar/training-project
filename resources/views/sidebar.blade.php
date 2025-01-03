@@ -6,7 +6,28 @@
         <li><a class="dropdown-item" href="/learning-home">Learning App</a></li>
         <li><a class="dropdown-item" href="/attendance-home">Attendance</a></li>
 
+        <?php
+        if(Auth::check()){
+            ?>
+
         <li><a class="dropdown-item" href="/designations">Designations</a></li>
+
+
+
+        <?php
+        }
+        else {
+            ?>
+
+        <li><a class="dropdown-item" href="/login_page">Login</a></li>
+
+        <?php
+        }
+
+        ?>
+
+
+
 
 
 
