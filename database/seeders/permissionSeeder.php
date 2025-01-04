@@ -25,7 +25,7 @@ class permissionSeeder extends Seeder
 
 
 
-        $permissions = ['Assets.create', 'Assets.view', 'Assets.delete', 'Assets.edit', 'Assets.record', 'Assets.rec_own', 'Attendances.create', 'Attendances.view', 'Attendances.delete', 'Attendances.edit', 'Departments.create', 'Departments.view', 'Departments.delete', 'Departments.edit', 'Documents.create', 'Documents.view', 'Documents.delete', 'Documents.edit', 'Leaves.create', 'Leaves.view', 'Leaves.delete', 'Leaves.edit', 'Roles.create', 'Roles.view', 'Roles.delete', 'Roles.edit',  'Users.create', 'Users.view', 'Users.delete', 'Users.edit'];
+        $permissions = ['Assets.create', 'Assets.view', 'Assets.delete', 'Permissions.assign', 'Permissions.view', 'Permissions.remove', 'Assets.edit', 'Assets.record', 'Assets.rec_own', 'Attendances.create', 'Attendances.view', 'Attendances.delete', 'Attendances.edit', 'Departments.create', 'Departments.view', 'Departments.delete', 'Departments.edit', 'Documents.create', 'Documents.view', 'Documents.delete', 'Documents.edit', 'Leaves.create', 'Leaves.view', 'Leaves.delete', 'Leaves.edit', 'Roles.create', 'Roles.view', 'Roles.delete', 'Roles.edit',  'Users.create', 'Users.view', 'Users.delete', 'Users.edit'];
 
         foreach ($permissions as $permission) {
             # code...

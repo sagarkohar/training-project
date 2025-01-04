@@ -158,4 +158,54 @@ class rolepermission extends Controller
 
         return view("rolepermission.profile", compact("roles", "permissions"));
     }
+
+    public function viewUser($name)
+    {
+        echo "This is view page of " . $name . " user";
+    }
+
+    public function deleteUser($name)
+    {
+        echo "This is delete page of " . $name . " user";
+    }
+    public function editUser($name)
+    {
+        echo "This is edit page of " . $name . " user";
+    }
+    public function createUser()
+    {
+        echo "This is create page of  user";
+    }
+
+    public function assets()
+    {
+        return view("rolepermission.assets_table");
+    }
+
+    public function viewAssets()
+    {
+        echo "this is viewAssets page";
+    }
+
+    public function deleteAssets()
+    {
+        echo "this is deleteAssets page";
+    }
+    public function editAssets()
+    {
+        echo "this is editAssets page";
+    }
+    public function createAssets()
+    {
+        echo "this is createAssets page";
+    }
+    public function recordAssets()
+    {
+        echo "this is recordAssets page";
+    }
+
+    public function rec_ownAssets()
+    {
+        echo "this is rec_ownAssets page";
+    }
 }

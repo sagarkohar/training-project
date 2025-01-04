@@ -24,7 +24,7 @@ class login extends Controller
         if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']], true)) {
             $request->session()->regenerate();
 
-            return redirect("/designations");
+            return redirect("/profile");
         } else {
             return redirect()->back()->with("error", "Invalid credentials.");
         }
@@ -34,6 +34,6 @@ class login extends Controller
     {
         Auth::logout();
 
-        return redirect()->back()->with("error", "You are no longer logged in ");
+        return redirect()->route('loginpage')->with("error", "You are no longer logged in ");
     }
 }

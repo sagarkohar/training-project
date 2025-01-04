@@ -20,7 +20,7 @@ class CheckUser
         if (Auth::check()) {
             return $next($request);
         } else {
-            return redirect()->route("loginpage")->with("error", "Not permitted to open without loggin");
+            abort(403, 'You are not authorized to view this page.Please login first');
         }
     }
 }
