@@ -43,35 +43,35 @@ Route::controller(secondController::class)->group(function () {
     Route::post("delete_Attendance", "deleteAttendance");
 });
 
-Route::middleware(['checkUser'])->group(function () {
-    Route::controller(rolepermission::class)->group(function () {
+// Route::middleware(['checkUser'])->group(function () {
+Route::controller(rolepermission::class)->group(function () {
 
-        Route::get("designations", "designation")->name("designation")->middleware('checkRole:Roles.view');
-        // Route::get("designations", "designation")->name("designation");
-        Route::get("add-designation", "addDesignationView");
-        Route::post("add-designation", "addDesignationMethod");
-        Route::get("permissions", 'permissions')->name("permissions");
-        Route::get("/add-permission", 'addPermissionView');
-        Route::post("add-permission", "addPermissionMethod");
-        Route::get("show-permission-{role}", "showPermissionRole")->middleware('checkRole:Permissions.view');
-        Route::post("assign-permission", "assignPermission")->middleware('checkRole:Permissions.assign');
-        Route::get("users", "users")->middleware('checkRole:Users.view');
-        Route::get("user-roles-{user}", "userRole")->middleware('checkRole:Roles.view');
-        Route::post("assign-roles", "assignRoles")->middleware('checkRole:Roles.edit');
-        Route::get("profile", 'profile')->name("profile");
-        Route::get("/view-user-{name}", 'viewUser');
-        Route::get("/delete-user-{name}", 'deleteUser');
-        Route::get("/edit-user-{name}", 'editUser');
-        Route::get("/create-user", 'createUser');
-        Route::get("assets", "assets")->middleware('checkRole:Assets.view');
-        Route::get("view-assets", 'viewAssets');
-        Route::get("delete-assets", 'deleteAssets');
-        Route::get("create-assets", 'createAssets');
-        Route::get("edit-assets", 'editAssets');
-        Route::get("record-assets", 'recordAssets');
-        Route::get("rec_own-assets", 'rec_ownAssets');
-    });
+    Route::get("designations", "designation")->name("designation")->middleware('checkRole:Roles.view');
+    // Route::get("designations", "designation")->name("designation");
+    Route::get("add-designation", "addDesignationView")->middleware('auth:sanctum');
+    Route::post("add-designation", "addDesignationMethod");
+    Route::get("permissions", 'permissions')->name("permissions");
+    Route::get("/add-permission", 'addPermissionView');
+    Route::post("add-permission", "addPermissionMethod");
+    Route::get("show-permission-{role}", "showPermissionRole")->middleware('checkRole:Permissions.view');
+    Route::post("assign-permission", "assignPermission")->middleware('checkRole:Permissions.assign');
+    Route::get("users", "users")->middleware('checkRole:Users.view');
+    Route::get("user-roles-{user}", "userRole")->middleware('checkRole:Roles.view');
+    Route::post("assign-roles", "assignRoles")->middleware('checkRole:Roles.edit');
+    Route::get("profile", 'profile')->name("profile");
+    Route::get("/view-user-{name}", 'viewUser');
+    Route::get("/delete-user-{name}", 'deleteUser');
+    Route::get("/edit-user-{name}", 'editUser');
+    Route::get("/create-user", 'createUser');
+    Route::get("assets", "assets")->middleware('checkRole:Assets.view');
+    Route::get("view-assets", 'viewAssets');
+    Route::get("delete-assets", 'deleteAssets');
+    Route::get("create-assets", 'createAssets');
+    Route::get("edit-assets", 'editAssets');
+    Route::get("record-assets", 'recordAssets');
+    Route::get("rec_own-assets", 'rec_ownAssets');
 });
+// });
 
 
 
